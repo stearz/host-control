@@ -1,0 +1,6 @@
+.idea/
+.vagrant/
+*.retry
+*.log
+.idea/
+ansible-pull.iml

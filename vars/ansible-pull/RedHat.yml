@@ -1,0 +1,6 @@
+ansible_pull_needed_packages:
+  - ansible
+  - git
+  - sudo
+  - cronie
+  - logrotate

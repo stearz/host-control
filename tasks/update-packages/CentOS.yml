@@ -1,0 +1,6 @@
+- name: Upgrade all packages ({{ ansible_facts['distribution'] }})
+  yum:
+    name: '*'
+    state: latest
+    update_only: yes
+    update_cache: yes
