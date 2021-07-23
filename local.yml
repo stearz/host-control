@@ -7,10 +7,9 @@
   tasks:
     - name: Including main vars for the play
       include_vars: vars/main.yml
-    
+
     - name: Including distribution specific tasks for updating packages
       include_tasks: "tasks/update-packages/{{ ansible_facts['distribution'] }}.yml"
 
     - name: Including tasks to configure ansible-pull
       include_tasks: "tasks/ansible-pull/main.yml"
-        
