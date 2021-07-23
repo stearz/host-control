@@ -1,6 +1,0 @@
-- name: Upgrade all packages ({{ ansible_facts['distribution'] }})
-  apt:
-    name: '*'
-    state: latest
-    only_upgrade: yes
-    update_cache: yes

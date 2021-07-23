@@ -1,9 +1,9 @@
 - name: "ansible-pull | Including distribution specific package list"
-  include_vars: "{{ item }}"
+  include_vars: "vars/ansible-pull/{{ item }}"
   with_first_found:
-    - "vars/ansible-pull/{{ ansible_distribution }}.yml"
-    - "vars/ansible-pull/{{ ansible_os_family }}.yml"
-    - "vars/ansible-pull/default.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
 
 - name: "ansible-pull | Ensure needed packages are installed"
   package:

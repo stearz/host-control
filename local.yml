@@ -10,7 +10,11 @@
       include_vars: vars/main.yml
 
     - name: Including distribution specific tasks for updating packages
-      include_tasks: "tasks/update-packages/{{ ansible_facts['distribution'] }}.yml"
+      include_tasks: "tasks/update-packages/{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "default.yml"
 
     - name: Including tasks to configure ansible-pull
       include_tasks: "tasks/ansible-pull/main.yml"
