@@ -38,7 +38,7 @@
     state: present
     validate: "visudo -cf %s"
 
-- name: "ansible-pull | Ensure that files in /etc/sudoers.d are included"
+- name: "ansible-pull | Enable ansible logging"
   lineinfile:
     dest: /etc/ansible/ansible.cfg
     line: "log_path = /var/log/ansible.log"
