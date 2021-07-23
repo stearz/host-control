@@ -38,6 +38,13 @@
     state: present
     validate: "visudo -cf %s"
 
+- name: "ansible-pull | Ensure that files in /etc/sudoers.d are included"
+  lineinfile:
+    dest: /etc/ansible/ansible.cfg
+    line: "log_path = /var/log/ansible.log"
+    insertafter: '^#log_path'
+    state: present
+
 - name: "ansible-pull | Configure logrotation for ansible.log"
   template:
     src: templates/etc/logrotate.d/ansible-pull.j2
