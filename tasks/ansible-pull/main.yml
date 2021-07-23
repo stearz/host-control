@@ -51,7 +51,7 @@
     name: ansible-pull
     minute: "*/{{ ansible_pull_every_minutes }}"
     user: ansible
-    job: "ansible-pull --url git@github.com:stearz/host-control.git \
+    job: "ansible-pull --url https://github.com/stearz/host-control.git \
                        --sleep 60 \
                        --checkout {{ ansible_pull_branch }} \
                        --accept-host-key \
