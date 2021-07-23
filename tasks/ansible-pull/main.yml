@@ -44,7 +44,7 @@
     owner: ansible
     group: root
     mode: "0640"
-    state: present
+    state: file
 
 - name: "ansible-pull | Enable ansible logging"
   lineinfile:
