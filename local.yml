@@ -3,6 +3,7 @@
 ---
 - hosts: all,localhost
   connection: local
+  become: true
 
   tasks:
     - name: Including main vars for the play
