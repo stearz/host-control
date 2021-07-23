@@ -40,7 +40,7 @@
 
 - name: "ansible-pull | Creating ansible log file"
   file:
-    path: /etc/ansible/ansible.cfg
+    path: /var/log/ansible.log
     owner: ansible
     group: root
     mode: "0640"
