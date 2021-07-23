@@ -6,6 +6,11 @@
   become: true
 
   tasks:
+    - name: Ending execution on GitHub action host
+      meta: end_host
+      when:
+        - ansible_distribution == 'Alpine'
+
     - name: Including main vars for the play
       include_vars: vars/main.yml
 
