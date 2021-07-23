@@ -38,6 +38,14 @@
     state: present
     validate: "visudo -cf %s"
 
+- name: "ansible-pull | Creating ansible log file"
+  file:
+    path: /etc/ansible/ansible.cfg
+    owner: ansible
+    group: root
+    mode: "0640"
+    state: present
+
 - name: "ansible-pull | Enable ansible logging"
   lineinfile:
     dest: /etc/ansible/ansible.cfg
