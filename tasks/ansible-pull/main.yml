@@ -51,5 +51,11 @@
     name: ansible-pull
     minute: "*/{{ ansible_pull_every_minutes }}"
     user: ansible
-    job: "ansible-pull -U git@github.com:stearz/host-control.git --checkout {{ ansible_pull_branch }} --only-if-changed"
+    job: "ansible-pull --url git@github.com:stearz/host-control.git \
+                       --sleep 60 \
+                       --checkout {{ ansible_pull_branch }} \
+                       --accept-host-key \
+                       --inventory inventory \
+                       --clean \
+                       --force"
     cron_file: ansible-pull
