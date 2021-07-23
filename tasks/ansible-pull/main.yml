@@ -55,7 +55,6 @@
                        --sleep 60 \
                        --checkout {{ ansible_pull_branch }} \
                        --accept-host-key \
-                       --inventory inventory \
                        --clean \
                        --force"
     cron_file: ansible-pull
