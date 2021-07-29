@@ -38,6 +38,11 @@
     state: present
     validate: "visudo -cf %s"
 
+- name: Get stats of /var/log/ansible.log
+  ansible.builtin.stat:
+    path: /var/log/ansible.log
+  register: stat_ansible_log
+
 - name: "ansible-pull | Creating ansible log file"
   file:
     path: /var/log/ansible.log
@@ -45,6 +50,7 @@
     group: root
     mode: "0640"
     state: touch
+  when: not stat_ansible_log.stat.exists
 
 - name: "ansible-pull | Enable ansible logging"
   lineinfile:

@@ -3,6 +3,7 @@
 ---
 - hosts: all,localhost
   connection: local
+  strategy: free
   become: true
 
   tasks:
