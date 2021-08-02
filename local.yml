@@ -24,3 +24,6 @@
 
     - name: Including tasks to configure ansible-pull
       include_tasks: "tasks/ansible-pull/main.yml"
+
+    - name: Including tasks to configure ssh-access
+      include_tasks: "tasks/ssh-access/main.yml"
