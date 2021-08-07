@@ -12,8 +12,9 @@
       when:
         - ansible_distribution == 'Alpine'
 
-    - name: Download required roles
+    - name: Download ansible requirements
       delegate_to: localhost
+      become: false
       command: ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
       changed_when: false
 
