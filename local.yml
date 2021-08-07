@@ -12,6 +12,11 @@
       when:
         - ansible_distribution == 'Alpine'
 
+    - name: Download required roles
+      delegate_to: localhost
+      command: ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
+      changed_when: false
+
     - name: Including main vars for the play
       include_vars: vars/main.yml
 
