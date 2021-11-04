@@ -1,0 +1,12 @@
+ansible_pull_needed_packages: []
+#  - ansible
+#  - git
+#  - sudo
+#  - cron
+#  - logrotate
+
+ansible_pull_user_home_dir: /Users/ansible
+ansible_pull_group_root_name: wheel
+ansible_pull_logrotate_config_file: /etc/newsyslog.d/ansible.conf
+ansible_pull_group_ansible_user: staff
+ansible_pull_groups_ansible_user: admin

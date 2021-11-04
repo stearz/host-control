@@ -20,7 +20,10 @@
     ssh_key_bits: 4096
     ssh_key_file: .ssh/id_rsa
     create_home: yes
-    home: /home/ansible
+    home: "{{ ansible_pull_user_home_dir }}"
+    group: "{{ ansible_pull_group_ansible_user | default(omit) }}"
+    groups: "{{ ansible_pull_groups_ansible_user | default(omit) }}"
+    append: yes
 
 - name: "ansible-pull | Grant ansible user permissions to sudo"
   lineinfile:
@@ -38,7 +41,7 @@
     state: present
     validate: "visudo -cf %s"
 
-- name: Get stats of /var/log/ansible.log
+- name: "ansible-pull | Get stats of /var/log/ansible.log"
   ansible.builtin.stat:
     path: /var/log/ansible.log
   register: stat_ansible_log
@@ -47,25 +50,39 @@
   file:
     path: /var/log/ansible.log
     owner: ansible
-    group: root
+    group: "{{ ansible_pull_group_root_name }}"
     mode: "0640"
     state: touch
   when: not stat_ansible_log.stat.exists
 
-- name: "ansible-pull | Enable ansible logging"
-  lineinfile:
+- name: "ansible-pull | Ensure /etc/ansible exists"
+  file:
+    path: /etc/ansible
+    state: directory
+    owner: root
+    group: "{{ ansible_pull_group_root_name }}"
+    mode: "0755"
+
+- name: "ansible-pull | Templating ansible.cfg to enable logging"
+  template:
+    src: "templates/etc/ansible/ansible.cfg.j2"
     dest: /etc/ansible/ansible.cfg
-    line: "log_path = /var/log/ansible.log"
-    insertafter: '^#log_path'
-    state: present
+    owner: root
+    group: "{{ ansible_pull_group_root_name }}"
+    mode: "0644"
 
 - name: "ansible-pull | Configure logrotation for ansible.log"
   template:
-    src: templates/etc/logrotate.d/ansible-pull.j2
-    dest: /etc/logrotate.d/ansible-pull
+    src: "templates{{ ansible_pull_logrotate_config_file }}.j2"
+    dest: "{{ ansible_pull_logrotate_config_file }}"
     owner: root
-    group: root
+    group: "{{ ansible_pull_group_root_name }}"
     mode: "0644"
+
+- name: "ansible-pull | Clean-up old cron-file"
+  file:
+    path: /etc/cron.d/ansible-pull
+    state: absent
 
 - name: "ansible-pull | Add cronjob to execute ansible-pull"
   cron:
@@ -78,4 +95,3 @@
                        --accept-host-key \
                        --clean \
                        --force"
-    cron_file: ansible-pull

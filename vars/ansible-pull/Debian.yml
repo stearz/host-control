@@ -5,3 +5,7 @@ ansible_pull_needed_packages:
   - cron
   - logrotate
   - openssh-client
+
+ansible_pull_user_home_dir: /home/ansible
+ansible_pull_group_root_name: root
+ansible_pull_logrotate_config_file: /etc/logrotate.d/ansible-pull

@@ -39,3 +39,4 @@
 
     - name: Including tasks to configure ssh-access
       include_tasks: "tasks/ssh-access/main.yml"
+      when: ansible_distribution != "MacOSX"
