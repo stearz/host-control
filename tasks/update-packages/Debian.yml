@@ -1,5 +1,6 @@
 - name: Allow release-info to change for APT repositories
   command: apt-get update -y --allow-releaseinfo-change
+  changed_when: false
 
 - name: Upgrade all packages ({{ ansible_facts['distribution'] }})
   apt:

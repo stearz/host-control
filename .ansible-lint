@@ -1,3 +1,4 @@
 warn_list:
   - package-latest
   - '106'  # Role name {} does not match ``^[a-z][a-z0-9_]+$`` pattern
+  - command-instead-of-module  # Using command rather than module
