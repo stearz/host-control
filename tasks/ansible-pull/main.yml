@@ -94,4 +94,5 @@
                        --checkout {{ ansible_pull_branch }} \
                        --accept-host-key \
                        --clean \
-                       --force"
+                       --force \
+                       local.yml"
