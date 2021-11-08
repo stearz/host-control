@@ -61,7 +61,7 @@
     state: directory
     owner: root
     group: "{{ ansible_pull_group_root_name }}"
-    mode: "0755"
+    mode: "0775"
 
 - name: "ansible-pull | Templating ansible.cfg to enable logging"
   template:
