@@ -55,9 +55,9 @@
     state: touch
   when: not stat_ansible_log.stat.exists
 
-- name: "ansible-pull | Ensure /etc/ansible exists"
+- name: "ansible-pull | Ensure /etc/ansible/facts.d exists"
   file:
-    path: /etc/ansible
+    path: /etc/ansible/facts.d
     state: directory
     owner: root
     group: "{{ ansible_pull_group_root_name }}"
@@ -89,10 +89,11 @@
     name: ansible-pull
     minute: "*/{{ ansible_pull_every_minutes }}"
     user: ansible
-    job: "/usr/local/bin/ansible-pull --url https://github.com/stearz/host-control.git \
-                       --sleep 60 \
-                       --checkout {{ ansible_pull_branch }} \
-                       --accept-host-key \
-                       --clean \
-                       --force \
-                       local.yml"
+    job: "/usr/local/bin/ansible-pull \
+          --url https://github.com/stearz/host-control.git \
+          --sleep 60 \
+          --checkout {{ ansible_pull_branch }} \
+          --accept-host-key \
+          --clean \
+          --force \
+          local.yml"
